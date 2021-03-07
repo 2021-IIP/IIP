@@ -19,9 +19,6 @@ def algorithm_custom(incline, draw_left, draw_right, warpLeft, warpRight, origin
             self.x = x
             self.y = y
     
-    leftPoints = list(map(lambda x,y : Point(x,y),(originalLeft_x,originalLeft_y)))
-    rightPoints = list(map(lambda x,y : Point(x,y),(originalRight_x,originalRight_y)))
-
     left = True
     right = True
 
@@ -43,24 +40,24 @@ def algorithm_custom(incline, draw_left, draw_right, warpLeft, warpRight, origin
 
 #start code from here
     steer = 1500 # min : 500 , max : 2500
-    speed = 3000 # min : -5000 , max : 5000 , middle : 0
+    speed = 2000 # min : -5000 , max : 5000 , middle : 0
 
     try:
         mean = (originalLeft_x[0]+originalRight_x[0])/2
     except:
         pass
 
-    if left and right:
+    '''if left and right:
         steer = 1500
 
         if mean > 185:
             steer = 1900
         if mean < 140:
             steer = 1250
-            
+
     elif left and not right:
         steer = 1800
-        if((originalLeft_y[0]+originalLeft_y[-1])/2 > 150):
+        if (originalLeft_y[0]+originalLeft_y[-1])/2 > 150:
             steer = 1900
 
         
@@ -69,6 +66,8 @@ def algorithm_custom(incline, draw_left, draw_right, warpLeft, warpRight, origin
             steer = 1900
         steer = 1150
         if (incline[1] < 0.4):
-            steer = 1100
+            steer = 1100'''
+
+    steer = 1500 * (originalLeft_x[0]+originalLeft_x[int(len(originalLeft_x)/2)]+originalLeft_x[-1]+originalRight_x[0]+originalRight_x[int(len(originalRight_x)/2)]+originalRight_x[-1])/(originalLeft_y[0]+originalLeft_y[int(len(originalLeft_y)/2)]+originalLeft_y[-1]+originalRight_y[0]+originalRight_y[int(len(originalRight_y)/2)]+originalRight_y[-1])
 
     return steer , speed
