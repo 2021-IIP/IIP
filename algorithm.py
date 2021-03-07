@@ -40,7 +40,7 @@ def algorithm_custom(incline, draw_left, draw_right, warpLeft, warpRight, origin
 
 #start code from here
     steer = 1500 # min : 500 , max : 2500
-    speed = 2000 # min : -5000 , max : 5000 , middle : 0
+    speed = 1500 # min : -5000 , max : 5000 , middle : 0
 
     try:
         mean = (originalLeft_x[0]+originalRight_x[0])/2
@@ -68,6 +68,10 @@ def algorithm_custom(incline, draw_left, draw_right, warpLeft, warpRight, origin
         if (incline[1] < 0.4):
             steer = 1100'''
 
-    steer = 1500 * (originalLeft_x[0]+originalLeft_x[int(len(originalLeft_x)/2)]+originalLeft_x[-1]+originalRight_x[0]+originalRight_x[int(len(originalRight_x)/2)]+originalRight_x[-1])/(originalLeft_y[0]+originalLeft_y[int(len(originalLeft_y)/2)]+originalLeft_y[-1]+originalRight_y[0]+originalRight_y[int(len(originalRight_y)/2)]+originalRight_y[-1])
+    #direction = (sum(originalLeft_x)+sum(originalRight_x))/(sum(originalRight_y)+sum(originalLeft_y))
+    direction = incline[0]/(incline[0]-incline[1]+1)
+    if incline[0]*incline[1] < 0:
+        direction = (sum(originalLeft_x)+sum(originalRight_x))/(sum(originalRight_y)+sum(originalLeft_y))
+    steer = 1500 * direction
 
     return steer , speed
