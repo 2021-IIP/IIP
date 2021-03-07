@@ -69,7 +69,7 @@ def algorithm_custom(incline, draw_left, draw_right, warpLeft, warpRight, origin
             steer = 1100'''
 
     #direction = (sum(originalLeft_x)+sum(originalRight_x))/(sum(originalRight_y)+sum(originalLeft_y))
-    direction = incline[0]/(incline[0]-incline[1]+1)
+    direction = incline[0]/(-incline[0]-incline[1]+1)
     if incline[0]*incline[1] < 0:
         direction = (sum(originalLeft_x)+sum(originalRight_x))/(sum(originalRight_y)+sum(originalLeft_y))
     steer = 1500 * direction
